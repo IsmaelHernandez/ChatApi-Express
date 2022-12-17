@@ -40,28 +40,14 @@ const getMyUser = (req, res) => {
 
 
 const postUser = (req, res) => {
-    const {firstName, lastName, email, password, gender, age} = req.body
-    userControllers.createUser({firstName, lastName, email, password, gender, age})
-        .then(async(data) => {
-            await mailer.sendMail({
-                from: '<test.academlo@gmail.com>',
-                to: data.email,
-                subject: `Bienvenido ${data.firstName}`,
-                html: `<h1>Bienvenido a nuestra app ${data.firstName}</h1> <a href="#" class="myButton">turquoise</a> `,
-                text: 'Que gusto verte por aqui',
-                
-            })
+    const {firstName, lastName, email, password, age, gender} = req.body
+
+    userControllers.createUser({firstName, lastName, email, password, age, gender})
+        .then((data) => {
             res.status(201).json(data)
         })
         .catch((err) => {
-            res.status(400).json({message: err.message, fields: {
-                firstName: 'String',
-                lastName: 'String',
-                email: 'example@example.com',
-                password: 'String',
-                gender: 'String',
-                birthday: 'YYYY/MM/DD'
-            }})
+            res.status(400).json({ message: err.message})
         })
 }
 
