@@ -14,7 +14,7 @@ const postConversation = (req, res) => {
     const {title, imgUrl, participantId} = req.body
     const ownerId = req.user.id //token decodificado
     ConversationControllers.createConversation({title, imgUrl, participantId, ownerId})
-        .then((data) => {
+        .then(data => {
             res.status(201).json(data)
         })
         .catch(err => {

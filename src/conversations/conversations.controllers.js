@@ -3,6 +3,8 @@ const uuid = require('uuid')
 const Participants = require('../models/participants.models')
 const Users = require('../models/users.models')
 
+
+//mostrar usuarios y conversaciones - la union gracias a la tabla pivote
 const findAllConversation = async () => {
     // anidar joins
     const data = await Conversations.findAll({
